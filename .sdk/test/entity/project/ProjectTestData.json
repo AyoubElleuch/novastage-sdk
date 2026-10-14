@@ -1,0 +1,77 @@
+{
+  "existing": {
+    "project": {
+      "PROJECT00": {
+        "createdAt": "s78",
+        "description": "s79",
+        "id": "PROJECT00",
+        "inviteCode": "s7b",
+        "maxMembers": 124,
+        "memberList": [],
+        "members": 126,
+        "name": "s7f",
+        "pendingRequestsCount": 128,
+        "role": "s81",
+        "slug": "s82",
+        "updatedAt": "s83"
+      },
+      "PROJECT01": {
+        "createdAt": "sf0",
+        "description": "sf1",
+        "id": "PROJECT01",
+        "inviteCode": "sf3",
+        "maxMembers": 244,
+        "memberList": [],
+        "members": 246,
+        "name": "sf7",
+        "pendingRequestsCount": 248,
+        "role": "sf9",
+        "slug": "sfa",
+        "updatedAt": "sfb"
+      },
+      "PROJECT02": {
+        "createdAt": "s168",
+        "description": "s169",
+        "id": "PROJECT02",
+        "inviteCode": "s16b",
+        "maxMembers": 364,
+        "memberList": [],
+        "members": 366,
+        "name": "s16f",
+        "pendingRequestsCount": 368,
+        "role": "s171",
+        "slug": "s172",
+        "updatedAt": "s173"
+      }
+    }
+  },
+  "new": {
+    "project": {
+      "project_ref01": {
+        "createdAt": "s1e0",
+        "description": "s1e1",
+        "inviteCode": "s1e3",
+        "maxMembers": 484,
+        "memberList": [],
+        "members": 486,
+        "name": "s1e7",
+        "pendingRequestsCount": 488,
+        "role": "s1e9",
+        "slug": "s1ea",
+        "updatedAt": "s1eb"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/dashboard/projects": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/dashboard/projects": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

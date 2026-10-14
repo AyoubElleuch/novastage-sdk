@@ -1,0 +1,53 @@
+{
+  "existing": {
+    "member": {
+      "MEMBER00": {
+        "avatarUrl": "s46",
+        "email": "s47",
+        "fullName": "s48",
+        "joinedAt": "s49",
+        "role": "s4a",
+        "userId": "s4b",
+        "username": "s4c"
+      },
+      "MEMBER01": {
+        "avatarUrl": "s8c",
+        "email": "s8d",
+        "fullName": "s8e",
+        "joinedAt": "s8f",
+        "role": "s90",
+        "userId": "s91",
+        "username": "s92"
+      },
+      "MEMBER02": {
+        "avatarUrl": "sd2",
+        "email": "sd3",
+        "fullName": "sd4",
+        "joinedAt": "sd5",
+        "role": "sd6",
+        "userId": "sd7",
+        "username": "sd8"
+      }
+    }
+  },
+  "new": {
+    "member": {
+      "member_ref01": {
+        "avatarUrl": "s118",
+        "email": "s119",
+        "fullName": "s11a",
+        "joinedAt": "s11b",
+        "role": "s11c",
+        "userId": "s11d",
+        "username": "s11e"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/dashboard/projects/members": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

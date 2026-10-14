@@ -1,0 +1,31 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      description: "Five NovaStage operations selected for the Voxgig SDK exercise."
+      license: {
+        name: "MIT"
+        url: "https://opensource.org/licenses/MIT"
+      }
+      security: {
+        in: "header"
+        name: "Cookie"
+        prefix: ""
+        scheme: "sessionCookieHeader"
+        type: "apiKey"
+      }
+      servers: [
+        {
+          url: "https://novastage.app"
+        }
+      ]
+      summary: "Five NovaStage operations selected for the Voxgig SDK exercise."
+      title: "NovaStage SDK Exercise API"
+      version: "1.0.0"
+      website: "https://novastage.app"
+    }
+  }
+}
+

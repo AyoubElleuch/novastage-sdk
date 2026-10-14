@@ -1,0 +1,17 @@
+{
+  "files": [
+    "SUMMARY.md"
+  ],
+  "config": ".sdk/doc/qa/vale.ini",
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "Complete login Cookie header, including every Supabase auth-token chunk. This header scheme supports server SDKs; it is not a permanent API key. Browser clients use same-origin cookies. Retain refreshed Set-Cookie values. Bearer tokens are not supported.",
+      "Five NovaStage operations selected for the Voxgig SDK exercise.",
+      "Human-readable relative time, not an ISO timestamp.",
+      "Human-readable text such as Updated just now, not an ISO timestamp.",
+      "Success",
+      "Trimmed before the 1-80 character validation."
+    ]
+  }
+}

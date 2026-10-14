@@ -1,0 +1,40 @@
+{
+  "existing": {
+    "message_result": {
+      "MESSAGE_RESULT00": {
+        "message": "s1e",
+        "projectId": "s1f",
+        "success": true,
+        "id": "MESSAGE_RESULT00"
+      },
+      "MESSAGE_RESULT01": {
+        "message": "s3c",
+        "projectId": "s3d",
+        "success": true,
+        "id": "MESSAGE_RESULT01"
+      },
+      "MESSAGE_RESULT02": {
+        "message": "s5a",
+        "projectId": "s5b",
+        "success": true,
+        "id": "MESSAGE_RESULT02"
+      }
+    }
+  },
+  "new": {
+    "message_result": {
+      "message_result_ref01": {
+        "message": "s78",
+        "projectId": "s79",
+        "success": true
+      }
+    }
+  },
+  "requests": {
+    "POST /api/dashboard/projects/delete": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

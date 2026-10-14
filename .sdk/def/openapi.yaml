@@ -1,0 +1,353 @@
+openapi: 3.0.3
+info:
+  title: NovaStage SDK Exercise API
+  version: 1.0.0
+  description: Five NovaStage operations selected for the Voxgig SDK exercise.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+  - url: https://novastage.app
+tags:
+  - name: Account
+    description: Current signed-in account
+  - name: Projects
+    description: Projects and membership
+  - name: Project administration
+    description: Owner-only project administration
+security:
+  - sessionCookieHeader: []
+paths:
+  /api/dashboard/settings:
+    get:
+      operationId: getAccountSettings
+      tags:
+        - Account
+      summary: Read current account settings
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSettings'
+        '401':
+          $ref: '#/components/responses/Error401'
+  /api/dashboard/projects:
+    get:
+      operationId: listProjects
+      tags:
+        - Projects
+      summary: List projects owned by or shared with the current user
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectList'
+        '401':
+          $ref: '#/components/responses/Error401'
+    post:
+      operationId: createProject
+      tags:
+        - Projects
+      summary: Create a project owned by the current user
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResult'
+        '400':
+          $ref: '#/components/responses/Error400'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '500':
+          $ref: '#/components/responses/Error500'
+      description: Name is trimmed before validation. Malformed JSON returns 500.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectInput'
+  /api/dashboard/projects/members:
+    get:
+      operationId: listProjectMembers
+      tags:
+        - Projects
+      summary: List collaborators of a project
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberList'
+        '400':
+          $ref: '#/components/responses/Error400'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '500':
+          $ref: '#/components/responses/Error500'
+      description: 'Project membership or ownership required; access failures return 400. Query alias: id.'
+      parameters:
+        - name: projectId
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+  /api/dashboard/projects/delete:
+    post:
+      operationId: deleteProject
+      tags:
+        - Project administration
+      summary: Delete a project and its associated data
+      description: 'Owner only. Body alias: id. Malformed JSON returns 500.'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResult'
+        '400':
+          $ref: '#/components/responses/Error400'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '500':
+          $ref: '#/components/responses/Error500'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectIdInput'
+components:
+  securitySchemes:
+    sessionCookieHeader:
+      type: apiKey
+      in: header
+      name: Cookie
+      description: >-
+        Complete login Cookie header, including every Supabase auth-token chunk. This header scheme supports
+        server SDKs; it is not a permanent API key. Browser clients use same-origin cookies. Retain refreshed
+        Set-Cookie values. Bearer tokens are not supported.
+  schemas:
+    AccountSettings:
+      type: object
+      properties:
+        email:
+          type: string
+        profile:
+          $ref: '#/components/schemas/AccountProfile'
+      required:
+        - email
+        - profile
+    AccountProfile:
+      type: object
+      properties:
+        full_name:
+          type: string
+          nullable: true
+        username:
+          type: string
+          nullable: true
+        avatar_url:
+          type: string
+          nullable: true
+        role:
+          type: string
+          nullable: true
+        plan:
+          type: string
+          enum:
+            - free
+            - plus
+            - pro
+            - enterprise
+        created_at:
+          type: string
+          format: date-time
+      required:
+        - full_name
+        - username
+        - avatar_url
+        - role
+        - plan
+        - created_at
+      nullable: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      required:
+        - error
+    ProjectList:
+      type: object
+      properties:
+        projects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+        userName:
+          type: string
+      required:
+        - projects
+        - userName
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        slug:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        inviteCode:
+          type: string
+        role:
+          type: string
+          enum:
+            - owner
+            - collaborator
+        updatedAt:
+          type: string
+          description: Human-readable text such as Updated just now, not an ISO timestamp.
+        createdAt:
+          type: string
+          format: date-time
+        members:
+          type: integer
+        maxMembers:
+          type: integer
+        memberList:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectMember'
+        pendingRequestsCount:
+          type: integer
+      required:
+        - id
+        - slug
+        - name
+        - updatedAt
+        - members
+    ProjectMember:
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+        role:
+          type: string
+          enum:
+            - owner
+            - collaborator
+        fullName:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        username:
+          type: string
+          nullable: true
+        avatarUrl:
+          type: string
+          nullable: true
+        joinedAt:
+          type: string
+          description: Human-readable relative time, not an ISO timestamp.
+      required:
+        - userId
+        - role
+    ProjectResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+          enum:
+            - true
+        project:
+          $ref: '#/components/schemas/Project'
+      required:
+        - success
+        - project
+    CreateProjectInput:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 80
+          example: SDK Demo
+          description: Trimmed before the 1-80 character validation.
+        description:
+          type: string
+          nullable: true
+      required:
+        - name
+    MemberList:
+      type: object
+      properties:
+        success:
+          type: boolean
+          enum:
+            - true
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectMember'
+      required:
+        - success
+        - members
+    MessageResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+          enum:
+            - true
+        message:
+          type: string
+      required:
+        - success
+        - message
+    ProjectIdInput:
+      type: object
+      properties:
+        projectId:
+          type: string
+          format: uuid
+      required:
+        - projectId
+  responses:
+    Error401:
+      description: Missing, expired, or invalid login session
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error400:
+      description: Invalid input or project/membership rule failure
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error500:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

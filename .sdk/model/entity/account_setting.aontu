@@ -1,0 +1,61 @@
+# Entity: account_setting
+
+main: kit: entity: account_setting: {
+
+  alias: field: {}
+
+  fields: {
+    email: {
+      h: "Email"
+      n: "email"
+      r: true
+      t: "`$STRING`"
+    }
+    profile: {
+      h: "Profile"
+      n: "profile"
+      r: true
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "account_setting"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/dashboard/settings"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/dashboard/settings"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "dashboard"
+            }
+            {
+              lit: "settings"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

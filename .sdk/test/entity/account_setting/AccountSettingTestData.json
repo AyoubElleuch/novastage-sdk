@@ -1,0 +1,36 @@
+{
+  "existing": {
+    "account_setting": {
+      "ACCOUNT_SETTING00": {
+        "email": "s14",
+        "profile": {},
+        "id": "ACCOUNT_SETTING00"
+      },
+      "ACCOUNT_SETTING01": {
+        "email": "s28",
+        "profile": {},
+        "id": "ACCOUNT_SETTING01"
+      },
+      "ACCOUNT_SETTING02": {
+        "email": "s3c",
+        "profile": {},
+        "id": "ACCOUNT_SETTING02"
+      }
+    }
+  },
+  "new": {
+    "account_setting": {
+      "account_setting_ref01": {
+        "email": "s50",
+        "profile": {}
+      }
+    }
+  },
+  "requests": {
+    "GET /api/dashboard/settings": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,167 @@
+# Entity: project
+
+main: kit: entity: project: {
+
+  alias: field: {}
+
+  fields: {
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      r: false
+      t: "`$STRING`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      t: "`$STRING`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    inviteCode: {
+      h: "Invite Code"
+      n: "inviteCode"
+      r: false
+      t: "`$STRING`"
+    }
+    maxMembers: {
+      h: "Max Members"
+      n: "maxMembers"
+      r: false
+      t: "`$INTEGER`"
+    }
+    memberList: {
+      h: "Member List"
+      n: "memberList"
+      r: false
+      t: "`$ARRAY`"
+    }
+    members: {
+      h: "Members"
+      n: "members"
+      r: true
+      t: "`$INTEGER`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      sh: "Trimmed before the 1-80 character validation."
+      t: "`$STRING`"
+    }
+    pendingRequestsCount: {
+      h: "Pending Requests Count"
+      n: "pendingRequestsCount"
+      r: false
+      t: "`$INTEGER`"
+    }
+    role: {
+      h: "Role"
+      n: "role"
+      r: false
+      t: "`$STRING`"
+    }
+    slug: {
+      h: "Slug"
+      n: "slug"
+      r: true
+      t: "`$STRING`"
+    }
+    updatedAt: {
+      h: "Updated At"
+      n: "updatedAt"
+      r: true
+      sh: "Human-readable text such as Updated just now, not an ISO timestamp."
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "project"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "description"
+            "name"
+          ]
+          co: {
+            id: "POST /api/dashboard/projects"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/dashboard/projects"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "dashboard"
+            }
+            {
+              lit: "projects"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.project`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/dashboard/projects"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/dashboard/projects"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "dashboard"
+            }
+            {
+              lit: "projects"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.projects`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

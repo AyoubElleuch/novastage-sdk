@@ -1,0 +1,18 @@
+# BasicMessageResultFlow
+
+main: kit: flow: BasicMessageResultFlow:
+{
+  entity: "message_result",
+  kind: "basic",
+  name: "BasicMessageResultFlow",
+  step: [
+    {
+      i: {
+        ref: "message_result_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicMessageResultFlow"
+}

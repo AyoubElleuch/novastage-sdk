@@ -1,0 +1,74 @@
+# Entity: message_result
+
+main: kit: entity: message_result: {
+
+  alias: field: {}
+
+  fields: {
+    message: {
+      h: "Message"
+      n: "message"
+      r: true
+      t: "`$STRING`"
+    }
+    projectId: {
+      fo: "uuid"
+      h: "Project Id"
+      n: "projectId"
+      r: true
+      t: "`$STRING`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  name: "message_result"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "projectId"
+          ]
+          co: {
+            id: "POST /api/dashboard/projects/delete"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/dashboard/projects/delete"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "dashboard"
+            }
+            {
+              lit: "projects"
+            }
+            {
+              lit: "delete"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
